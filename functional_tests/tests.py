@@ -38,6 +38,8 @@ class NewVisitorTest(LiveServerTestCase):
         # When he hits enter, the page updates and now the page lists
         # "1: buy potatoes" as an item in a to-do list
         inputbox.send_keys(Keys.ENTER)
+        herbert_list_url = self.browser.current_url
+        self.assertRegex(herbert_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1. buy potatoes')
         
         # There is still a text box inviting him to add another item
@@ -50,6 +52,36 @@ class NewVisitorTest(LiveServerTestCase):
         self.check_for_row_in_list_table('1. buy potatoes')
         self.check_for_row_in_list_table('2. wash and peel potatoes')
 
+        # Francis comes along to the site
+        
+        ## new browser session to start fresh (no cookies)
+        self.browser.quit()
+        self.browser = webdriver.Firefox()
+        
+        # Francis goes to the home page and sees no trace of Herbert's list
+        self.browser.get(self.live_server_url)
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('buy potatoes', page_text)
+        self.assertNotIn('wash and peel potatoes', page_text)
+        
+        # Francis enters a new list item
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Buy milk')
+        inputbox.send_keys(Keys.ENTER)
+        
+        # Francis gets his own unique URL
+        francis_list_url = self.browser.current_url
+        self.assertRegex(francis_list_url, '/lists/.+')
+        self.assertNotEqual(francis_list_url, herbert_list_url)
+        
+        # still no trace of Herbert's list
+        page_text = self.browser.find_element_by_tag_name('body').text
+        self.assertNotIn('buy potatoes', page_text)
+        self.assertIn('Buy milk', page_text)
+        
+        # todo page 163
+        
+        
         self.fail('Finish the test')
 
         # Herbert wonders if the site will remember his list. Seeing that 
