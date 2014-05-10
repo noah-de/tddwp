@@ -1,5 +1,7 @@
 #!/usr/local/bin/python3
 from django.template.loader import render_to_string
+from django.core.urlresolvers import resolve
+from django.http import HttpRequest
 from django.test import TestCase
 
 from lists.models import Item, List
@@ -53,8 +55,9 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'list.html')
         
     def test_displays_all_items(self):
-        Item.objects.create(text='itemy 1')
-        Item.objects.create(text='itemy 2')
+        listo = List.objects.create()
+        Item.objects.create(text='itemy 1', list=listo)
+        Item.objects.create(text='itemy 2', list=listo)
         
         #request = HttpRequest()
         response = self.client.get('/lists/the-only-list-in-the-world/')
