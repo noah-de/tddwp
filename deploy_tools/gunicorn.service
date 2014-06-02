@@ -1,0 +1,10 @@
+[Unit]
+Description=gunicorn daemon
+
+[Service]
+User=USERNAME
+WorkingDirectory=/home/USERNAME/gunicorn/bin
+ExecStart=/home/USERNAME/gunicorn/bin/gunicorn --debug --log-level debug test:app
+
+[Install]
+WantedBy=multi-user.target

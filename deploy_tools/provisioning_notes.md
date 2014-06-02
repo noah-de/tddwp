@@ -21,8 +21,9 @@ on Fedora 20:
 
 ## Systemd
 
-* see gunicorn-systemd
+* see gunicorn.service and gunicorn.socket
 * replace SITENAME with staging.my-domain.com
+* replace USERNAME
 
 ## Folder structure:
 Assume that we have a user account at /home/username
