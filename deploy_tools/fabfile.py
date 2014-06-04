@@ -14,3 +14,7 @@ def deploy():
     _update_virtualenv(source_folder)
     _update_static_files(source_folder)
     _update_database(source_folder)
+
+def _create_directory_structure_if_necessary(site_folder):
+    for subfolder in ('database', 'static','virtualenv','source'):
+        run('mkdir -p %s/%s' % (site_folder, subfolder))
