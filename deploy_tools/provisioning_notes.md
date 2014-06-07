@@ -28,6 +28,7 @@ on Fedora 20:
 ## Folder structure:
 Assume that we have a user account at /home/username
 
+<pre>
 /home/username
 └── sites
      └── SITENAME
@@ -35,3 +36,4 @@ Assume that we have a user account at /home/username
 	  ├── source
 	  ├── static
           └── virtualenv
+</pre>
