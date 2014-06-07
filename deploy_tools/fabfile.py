@@ -40,3 +40,6 @@ def _update_settings(source_folder, site_name):
         key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
         append(secret_key_file, "SECRET_KEY = '%s'" % (key,))
     append(settings_path, '\nfrom .sercet_key import SECRET_KEY')
+    
+def _update_static_files(source_folder):
+    run('cd % && ../virtualenv/bin/python3 manage.py collectstatic --noinput' % (source_folder,))
