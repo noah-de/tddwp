@@ -17,13 +17,12 @@ on Fedora 20:
 ## Nginx Virtual Host Config
 
 * nginx.template.conf
-* replace SITENAME with staging.my-domain.com
+* replace SITENAME with appropriate value
 
 ## Systemd
 
-* see gunicorn.service and gunicorn.socket
-* replace SITENAME with staging.my-domain.com
-* replace USERNAME
+* see gunicorn.service
+* replace SITENAME and USERNAME with appropriate values
 
 ## Folder structure:
 Assume that we have a user account at /home/username
