@@ -1,9 +1,10 @@
 from django.contrib.staticfiles.testing import StaticLiveServerCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from unittest import skip
 import sys
 
-class NewVisitorTest(StaticLiveServerCase):
+class FunctionalTest(StaticLiveServerCase):
     @classmethod
     def setUpClass(cls):
         for arg in sys.argv:
@@ -30,11 +31,13 @@ class NewVisitorTest(StaticLiveServerCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
 
+
+class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Herbert came across a to-do app that was on his own desktop. 
         # He finds it at localhost.
         self.browser.get(self.server_url)
-        
+    
         # He sees that the page title mentions to-do lists
         self.assertIn('To-Do', self.browser.title)
 
@@ -43,7 +46,7 @@ class NewVisitorTest(StaticLiveServerCase):
         self.assertEqual(
             inputbox.get_attribute('placeholder'),'Enter a to-do item'
         )
-        
+    
         # He types " buy potatoes" into a text box
         inputbox.send_keys('buy potatoes')
         
@@ -63,7 +66,7 @@ class NewVisitorTest(StaticLiveServerCase):
         # The page updates again, and now shows both items on the list
         self.check_for_row_in_list_table('1. buy potatoes')
         self.check_for_row_in_list_table('2. wash and peel potatoes')
-
+        
         # Francis comes along to the site
         
         ## new browser session to start fresh (no cookies)
@@ -90,11 +93,11 @@ class NewVisitorTest(StaticLiveServerCase):
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('buy potatoes', page_text)
         self.assertIn('Buy milk', page_text)
-
+        
         # Herbert wonders if the site will remember his list. Seeing that 
         # the site has generated a unique URL for him -- there is some 
         # text to that effect.
-
+class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # Edith goes to the home page
         self.browser.get(self.server_url)
@@ -111,6 +114,24 @@ class NewVisitorTest(StaticLiveServerCase):
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width']/2, 512, delta=5
         )
-
+    
+class ItemValidationTest(FunctionalTest):
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        # Edith goes to the home page and accidentally tries to submit and empty
+        # list item. She hits enter with an empty imput box
+        
+        # the home page refreshes, and there is an error message saying
+        # that the list items cannot be blank
+        
+        # she tries again with some text for the item, which now works
+        
+        # perversely, she tries to sumbit a second blank item
+        
+        # she receives a similar warning on the list page
+        
+        # she can correct it by filling in text
+        self.fail('write this test!')
+    
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
