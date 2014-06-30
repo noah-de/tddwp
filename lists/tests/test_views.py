@@ -33,7 +33,6 @@ class ListViewTest(TestCase):
         other_listo = List.objects.create()
         Item.objects.create(text='other itemy 1', list=other_listo)
         Item.objects.create(text='other itemy 2', list=other_listo)
-        #request = HttpRequest()
         response = self.client.get('/lists/%d/' % (correct_listo.id,))
         
         self.assertContains(response, 'itemy 1')
@@ -76,7 +75,7 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
 
         self.client.post(
-            '/lists/%d/add_item' % (correct_list.id,), 
+            '/lists/%d/' % (correct_list.id,), 
             data={'item_text': 'A new item for an existing list'}
         )
 
@@ -90,10 +89,10 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
 
         response = self.client.post(
-            '/lists/%d/add_item' % (correct_list.id,), 
+            '/lists/%d/' % (correct_list.id,), 
             data={'item_text': 'A new item for an existing list'}
-        )
-        self.assertRedirects(response,'/lists/%d/' % (correct_list.id))
+        )     
+        self.assertRedirects(response,'/lists/%d/' % (correct_list.id,))
 
     def  test_validation_errors_end_up_on_lists_page(self):
         listo = List.objects.create()
