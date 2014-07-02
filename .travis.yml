@@ -1,5 +1,8 @@
 language: python
-:python:
+python:
   - "3.3"
-install: "pip install -r requirements.txt"
-script: python manage.py test
+install: 
+  - pip install -r requirements.txt
+  - pip install https://www.djangoproject.com/download/1.7c1/tarball/
+script: 
+  - python manage.py test list
