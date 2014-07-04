@@ -1,6 +1,7 @@
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
 addons:
   firefox: "17.0"
@@ -15,5 +16,4 @@ install:
 
 script: 
   - python manage.py test lists
-  - python manage.py test functional_tests.test_list_item_validation
-  - python manage.py test functional_tests.test_simple_list_creation
+  - python manage.py test functional_tests
