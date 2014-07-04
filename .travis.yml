@@ -14,4 +14,5 @@ install:
   - pip install -r requirements.txt
 
 script: 
-  - python manage.py test
+  - python manage.py test lists
+  - python manage.py test functional_tests.test_list_item_validation
