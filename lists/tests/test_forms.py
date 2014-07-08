@@ -13,6 +13,6 @@ class ItemFormTest(TestCase):
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['text'],[EMPTY_LIST_ERROR])
 
-    def test_form_save_handles_saving_to_a_list(self):
-        form = ItemForm(data={'text':'regular text'})
-        new_item = form.save()
+    #def test_form_save_handles_saving_to_a_list(self):
+    #    form = ItemForm(data={'text':'regular text'})
+    #    new_item = form.save()
