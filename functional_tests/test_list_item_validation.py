@@ -29,3 +29,10 @@ class ItemValidationTest(FunctionalTest):
         self.get_item_input_box().send_keys('Make tea\n')
         self.check_for_row_in_list_table('1. Buy milk')
         self.check_for_row_in_list_table('2. Make tea')
+
+    def test_cannot_add_suplicate_items(self):
+        # Edwin goes to the home page and starts a new list
+        
+        # He accidentally tries to enter a suplicate item
+        
+        # sees a helpful error message
