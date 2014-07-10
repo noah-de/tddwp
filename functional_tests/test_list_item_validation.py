@@ -32,7 +32,14 @@ class ItemValidationTest(FunctionalTest):
 
     def test_cannot_add_suplicate_items(self):
         # Edwin goes to the home page and starts a new list
+        self.browser.get(self.server.url)
+        self.get_item_input_box().send_keys('Buy stuff\n')
+        self.check_for_row_in_list_table('1. Buy stuff')
         
         # He accidentally tries to enter a suplicate item
+        self.get_item_input_box().send_keys('Buy stuff\n')
         
         # sees a helpful error message
+        self.check_for_row_in_list_table('1. Buy stuff')
+        error = self.browser.find_element_by_css_selector('.has_error')
+        self.assertEqual(error.text, "You've already got this in your list")
