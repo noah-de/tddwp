@@ -28,9 +28,9 @@ class ItemModelsTest(TestCase):
     def test_duplicate_items_are_invalid(self):
         listo = List.objects.create()
         Item.objects.create(list=listo, text='bla')
-        with self.assertRaises(IntegrityError):
+        with self.assertRaises(ValidationError):
             item = Item(list=listo, text='bla')
-            item.save()
+            item.full_clean()
 
     def test_CAN_save_same_items_to_different_lists(self):
         list1 = List.objects.create()

@@ -1,4 +1,3 @@
-#!/usr/local/bin/python3
 from django.template.loader import render_to_string
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
@@ -9,6 +8,8 @@ from lists.forms import ItemForm, EMPTY_LIST_ERROR
 from lists.forms import ItemForm
 from lists.models import Item, List
 from lists.views import home_page
+
+from unittest import skip
 
 class HomePageTest(TestCase):
     maxDiff = None
@@ -116,6 +117,19 @@ class ListViewTest(TestCase):
     def test_for_invalid_input_shows_errors_on_page(self):
         response = self.post_invalid_input()
         self.assertContains(response, escape(EMPTY_LIST_ERROR))
+
+    @skip
+    def test_duplicate_item_validation_errors_end_up_on_lists_paeg(self):
+        listo = List.objects.create()
+        item1 = Item.objects.create(list=listo, text='textatic')
+        response = self.client.post(
+            '/lists/%d/' % (listo.id,),
+            data = {'text': 'textatic'}
+        )
+        expected_error = escape("You've already got this in your list")
+        self.assertContains(response, expected_error)
+        self.assertTemplate(response, 'list.html')
+        self.assertEqual(Item.objects.all().count(), 1)
 
     def test_displays_item_form(self):
         listo = List.objects.create()
