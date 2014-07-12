@@ -1,6 +1,5 @@
 from .base import FunctionalTest
-from unittest import skip, skipIf
-    
+
 class ItemValidationTest(FunctionalTest):
     
     def test_cannot_add_empty_list_items(self):
@@ -31,7 +30,6 @@ class ItemValidationTest(FunctionalTest):
         self.check_for_row_in_list_table('1. Buy milk')
         self.check_for_row_in_list_table('2. Make tea')
 
-    @skipIf(True, "I don't want to run this test yet")
     def test_cannot_add_duplicate_items(self):
         # Edwin goes to the home page and starts a new list
         self.browser.get(self.server_url)
