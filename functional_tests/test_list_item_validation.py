@@ -3,6 +3,9 @@ from unittest import skipIf
 
 class ItemValidationTest(FunctionalTest):
     
+    def get_error_element(self):
+        return self.browser.find_element_by_css_selector('.has_error')
+    
     def test_cannot_add_empty_list_items(self):
         # Edith goes to the home page and accidentally tries to submit and empty
         # list item. She hits enter with an empty imput box
