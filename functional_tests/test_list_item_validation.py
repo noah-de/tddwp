@@ -60,6 +60,6 @@ class ItemValidationTest(FunctionalTest):
         self.get_item_input_box().send_keys('a')
         
         # she is happy to see the error clear
-        error = self.browser.find_element_by_css_selector('.has_error')
+        error = self.get_error_element()
         self.assertFalse(error.is_displayed())
         
