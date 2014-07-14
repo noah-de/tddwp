@@ -1,4 +1,5 @@
 from .base import FunctionalTest
+from unittest import skipIf
 
 class ItemValidationTest(FunctionalTest):
     
@@ -43,3 +44,19 @@ class ItemValidationTest(FunctionalTest):
         self.check_for_row_in_list_table('1. Buy stuff')
         error = self.browser.find_element_by_css_selector('.has-error')
         self.assertEqual(error.text, "You've already got this in your list")
+
+    @skipIf(True, "I don't want to run this test yet")
+    def test_error_messages_are_cleared_on_input(self):
+        # Eunice starts a new list in a way that causes an error
+        self.browser.get(self.server_url)
+        self.get_item_input_box().send_keys('\n')
+        error = self.browser.find_element_by_css_selector('.has_error')
+        self.assertTrue(error.is_displayed())
+        
+        # she starts typing and the error clears
+        self.get_item_input_box().send_keys('a')
+        
+        # she is happy to see the error clear
+        error = self.browser.find_element_by_css_selector('.has_error')
+        self.assertFalse(error.is_displayed())
+        
