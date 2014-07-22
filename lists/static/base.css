@@ -1,5 +1,10 @@
 body{padding-top:1.2em;background-color: #5c5954 !important;} 
-/*background:#F5C52C;*/
+
+/* new color scheme inspiried by:
+http://bellroy.com/pages/slim-your-wallet-052014-03
+Thanks!
+background:#F5C52C;*/
+
 #id_list_table tr{
   font-family: 'Alegreya', serif;
   font-weight: 400;
