@@ -1,2 +1,9 @@
-body{padding-top:1.2em;background-color: #5c5954 !important;} /*background:#F5C52C;*/
+body{padding-top:1.2em;background-color: #5c5954 !important;} 
+/*background:#F5C52C;*/
+li{font-family: 'Alegreya', serif;
+font-weight: 400;
+font-style: italic;
+font-size: 24px;
+letter-spacing: 0.02em;}
+
 #id_text {margin-top: 2em;color:#b94947;}
