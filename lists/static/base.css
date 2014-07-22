@@ -1,9 +1,21 @@
 body{padding-top:1.2em;background-color: #5c5954 !important;} 
 /*background:#F5C52C;*/
-#id_list_table{font-family: 'Alegreya', serif;
-font-weight: 400;
-font-style: italic;
-font-size: 24px;
-letter-spacing: 0.02em;}
+#id_list_table{
+  font-family: 'Alegreya', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  color: #D3D0CB;
+  }
+h1{font-family: 'Lato',sans-serif;
+color: #c75724 !important;
+font-weight: 300;
+font-size: 50px;
+font-style: normal;
+text-transform: uppercase;
+margin-bottom: 25px;
+margin-top: 33px;
+}
 
 #id_text {margin-top: 2em;color:#b94947;}
