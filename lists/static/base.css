@@ -15,7 +15,7 @@ background:#F5C52C;*/
   }
 #id_list_table{color: #605c58;}
 
-h1{font-family: 'Lato',sans-serif;
+.jumbotron h1, .jumbotron .h1{font-family: 'Lato',sans-serif;
 color: #c75724 !important;
 font-weight: 300;
 font-size: 40px;
