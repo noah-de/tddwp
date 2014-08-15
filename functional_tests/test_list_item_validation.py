@@ -48,7 +48,6 @@ class ItemValidationTest(FunctionalTest):
         error = self.get_error_element()
         self.assertEqual(error.text, "You've already got this in your list")
 
-    #@skipIf(True, "I don't want to run this test yet")
     def test_error_messages_are_cleared_on_input(self):
         # Eunice starts a new list in a way that causes an error
         self.browser.get(self.server_url)
